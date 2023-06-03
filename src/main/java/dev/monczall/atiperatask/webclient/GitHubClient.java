@@ -3,6 +3,7 @@ package dev.monczall.atiperatask.webclient;
 import dev.monczall.atiperatask.expection.GitHubUserNotFoundException;
 import dev.monczall.atiperatask.webclient.dto.GitHubBranchDto;
 import dev.monczall.atiperatask.webclient.dto.GitHubCollectiveDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class GitHubClient {
 
     private final String GITHUB_URL = "https://api.github.com/";
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public List<GitHubCollectiveDto> getReposForUser(String userName) {
         List<GitHubCollectiveDto> gitHubCollectiveDto;
