@@ -35,16 +35,17 @@ public class GitHubService {
 
         filteredUserRepos.stream()
                 .forEach(repo -> {
-                    GitHubResponseDto responseDto = GitHubResponseDto.builder()
-                            .repositoryName(repo.getName())
-                            .ownerLogin(repo.getOwner().getLogin())
-                            .branchList(repo.getBranchList().stream()
-                                    .map(branch -> new GitHubResponseBranchDto(branch.getName(), branch.getCommit().getSha()))
-                                    .toList())
-                            .build();
+                    GitHubResponseDto responseDto = new GitHubResponseDto(
+                            repo.getName(),
+                            repo.getOwner().login(),
+                            repo.getBranchList().stream()
+                                    .map(branch -> new GitHubResponseBranchDto(branch.name(), branch.commit().sha()))
+                                    .toList()
+                            );
 
                     responseDtoList.add(responseDto);
                 });
+
 
         return responseDtoList;
     }
