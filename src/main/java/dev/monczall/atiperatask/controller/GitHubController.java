@@ -4,7 +4,6 @@ import dev.monczall.atiperatask.model.GitHubResponseDto;
 import dev.monczall.atiperatask.service.GitHubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +20,10 @@ public class GitHubController {
             value = "/user/{userName}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Object> getUserRepos(@PathVariable String userName) {
+    public List<GitHubResponseDto> getUserRepos(@PathVariable String userName) {
         List<GitHubResponseDto> response = gitHubService.getUserReposAndBranches(userName);
 
-        return ResponseEntity.ok(response);
+        return response;
     }
 
 }
